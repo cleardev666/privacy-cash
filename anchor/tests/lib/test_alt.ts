@@ -11,9 +11,17 @@ import {
   TransactionMessage
 } from '@solana/web3.js';
 import * as anchor from "@coral-xyz/anchor";
+import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 
 // Global ALT for test session (created once, used everywhere)
 let globalTestALT: PublicKey | null = null;
+
+/**
+ * Reset the global test ALT (call this when you need a fresh ALT with different addresses)
+ */
+export function resetGlobalTestALT() {
+  globalTestALT = null;
+}
 
 /**
  * Create a global test ALT that will be reused for all tests in the session
@@ -151,6 +159,48 @@ export function getTestProtocolAddresses(
     SystemProgram.programId,
     ComputeBudgetProgram.programId,
   ];
+}
+
+export function getTestProtocolAddressesWithMint(
+  programId: PublicKey,
+  authority: PublicKey,
+  treeAta: PublicKey,
+  feeRecipient: PublicKey,
+  feeRecipientAta: PublicKey,
+  splTreeAccount: PublicKey,
+  mint: PublicKey
+): PublicKey[] {
+  // Derive global config PDA
+  const [globalConfigAccount] = PublicKey.findProgramAddressSync(
+    [Buffer.from('global_config')],
+    programId
+  );
+
+  // Derive SOL tree account
+  const [treeAccount] = PublicKey.findProgramAddressSync(
+    [Buffer.from('merkle_tree')],
+    programId
+  );
+
+  const addresses = [
+    // Core program accounts (constant)
+    programId,
+    treeAccount,
+    treeAta,
+    globalConfigAccount,
+    authority,
+    feeRecipient,
+    feeRecipientAta,
+    splTreeAccount,
+    mint,
+    // System programs (constant)
+    SystemProgram.programId,
+    ComputeBudgetProgram.programId,
+    ASSOCIATED_TOKEN_PROGRAM_ID,
+    TOKEN_PROGRAM_ID,
+  ];
+
+  return addresses;
 }
 
 /**

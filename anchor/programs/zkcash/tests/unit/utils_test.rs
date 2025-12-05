@@ -4,7 +4,7 @@ use ark_ff::{PrimeField, BigInteger};
 use ark_serialize::{CanonicalDeserialize, CanonicalSerialize, Compress, Validate};
 use std::ops::Neg;
 use ark_bn254::Fr;
-use zkcash::{groth16::{is_less_than_bn254_field_size_be, Groth16Verifyingkey}, utils::{change_endianness, check_public_amount, verify_proof, validate_fee, calculate_complete_ext_data_hash, VERIFYING_KEY}, Proof};
+use zkcash::{Proof, groth16::{Groth16Verifyingkey, is_less_than_bn254_field_size_be}, utils::{VERIFYING_KEY, calculate_complete_ext_data_hash, change_endianness, check_public_amount, validate_fee, verify_proof}};
 use anchor_lang::prelude::*;
 
 type G1 = ark_bn254::g1::G1Affine;
@@ -1211,7 +1211,7 @@ fn test_calculate_complete_ext_data_hash_consistency_with_borsh() {
         encrypted_output2: encrypted_output2.to_vec(),
         fee,
         fee_recipient,  // Use the same fee_recipient
-        mint_address,
+        mint_address: mint_address,
     };
     
     let mut serialized = Vec::new();

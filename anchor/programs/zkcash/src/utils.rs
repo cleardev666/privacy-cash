@@ -270,6 +270,8 @@ pub fn verify_proof(proof: Proof, verifying_key: Groth16Verifyingkey) -> bool {
 /**
  * Calculate ExtData hash with encrypted outputs included
  * This matches the client-side calculation for hash verification
+ * 
+ * This is for SOL mint address only
  */
 pub fn calculate_complete_ext_data_hash(
     recipient: Pubkey,
@@ -298,7 +300,7 @@ pub fn calculate_complete_ext_data_hash(
         encrypted_output2: encrypted_output2.to_vec(),
         fee,
         fee_recipient,
-        mint_address,
+        mint_address
     };
     
     let mut serialized_ext_data = Vec::new();
