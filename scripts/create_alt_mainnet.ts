@@ -21,19 +21,14 @@ const deployKeypairPath = path.join(anchorDirPath, 'deploy-keypair.json');
 const keypairJson = JSON.parse(readFileSync(deployKeypairPath, 'utf-8'));
 const user = Keypair.fromSecretKey(Uint8Array.from(keypairJson));
 
-// Program ID for the zkcash program on devnet
-const PROGRAM_ID = new PublicKey('ATZj4jZ4FFzkvAcvk27DW9GRkgSbFnHo49fKKPQXU7VS');
-// Fee recipient for devnet
+const PROGRAM_ID = new PublicKey('9fhQBbumKEFuXtMBDw8AaQyAjCorLGJQiS3skWZdQyQD');
 const FEE_RECIPIENT_ACCOUNT = new PublicKey('AWexibGxNFKTa1b5R5MN4PJr9HWnWRwf8EW9g8cLx3dM');
-const authority = new PublicKey('97rSMQUukMDjA7PYErccyx7ZxbHvSDaeXp2ig5BwSrTf');
-
-// USDC mint address on devnet
-const USDC_MINT = new PublicKey('4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU');
-// Relayer address
+const authority = new PublicKey('AWexibGxNFKTa1b5R5MN4PJr9HWnWRwf8EW9g8cLx3dM');
+const USDC_MINT = new PublicKey('EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v');
 const RELAYER = new PublicKey('AF8VuwCncKd5ZBnLYYnMjqh4vLch8mjqE75sFe5ZjRFW');
 
 // Configure connection to Solana mainnet-beta
-const connection = new Connection('https://domini-i2gp2o-fast-devnet.helius-rpc.com', 'confirmed');
+const connection = new Connection('https://rorie-6cdtt5-fast-mainnet.helius-rpc.com', 'confirmed');
 
 /**
  * Create a new address lookup table
