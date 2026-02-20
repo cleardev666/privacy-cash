@@ -24,6 +24,7 @@ The implementation uses zero-knowledge proofs to ensure that withdrawals cannot 
 
 - Solana CLI 2.1.18 or later
 - Rust 1.79.0 or compatible version
+- Anchor 0.31.1
 - Node.js 16 or later
 - npm or yarn
 - Circom v2.2.2 https://docs.circom.io/getting-started/installation/#installing-dependencies
